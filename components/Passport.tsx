@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Pair } from "@/lib/pairs";
-import { DEMO_YEAR } from "@/lib/pairs";
 import type { Grade } from "@/lib/grade";
+import { mrz } from "@/lib/mrz";
 import { ShoeVisual } from "./ShoeArt";
 import { useToast } from "./Toast";
 import StoryTab from "./tabs/StoryTab";
@@ -95,7 +95,7 @@ export default function Passport({ pair }: { pair: Pair }) {
     tabRefs.current[n]?.focus();
   }
 
-  const years = DEMO_YEAR - pair.madeYear;
+  const [mrz1, mrz2] = mrz(pair);
 
   return (
     <main className="shell">
@@ -110,23 +110,17 @@ export default function Passport({ pair }: { pair: Pair }) {
         </p>
         <div className="hero">
           <ShoeVisual photo={pair.photo} leather={pair.leather} alt={`${pair.model}, ${pair.leather}`} priority />
+          <p className="stamp-auth">
+            <span>Authentic</span>
+            <b translate="no">Port Washington</b>
+            <span>Chip matched</span>
+          </p>
         </div>
-        <dl className="facts num">
-          <div>
-            <dt>hand steps</dt>
-            <dd>{pair.handSteps}</dd>
-          </div>
-          <div>
-            <dt>years in use</dt>
-            <dd>{years}</dd>
-          </div>
-          <div>
-            <dt>recrafts used</dt>
-            <dd>
-              {pair.recraftsUsed} <small>of ~{pair.recraftsMax}</small>
-            </dd>
-          </div>
-        </dl>
+        <p className="mrz" aria-hidden translate="no">
+          {mrz1}
+          <br />
+          {mrz2}
+        </p>
       </header>
 
       <div className="tabs-wrap" ref={anchor}>

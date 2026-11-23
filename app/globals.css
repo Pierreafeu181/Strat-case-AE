@@ -44,6 +44,7 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --serif: var(--font-serif), "Cormorant Garamond", Georgia, serif;
   --sans: var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif;
+  --mono: var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
 }
 
 * { box-sizing: border-box; }
@@ -62,7 +63,7 @@ body {
 button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulation; }
 button:disabled { cursor: default; }
 .num { font-variant-numeric: lining-nums tabular-nums; }
-.h1, .h2, .facts dd, .price, .r-title, .grade { font-variant-numeric: lining-nums; }
+.h1, .h2, .price, .r-title, .grade { font-variant-numeric: lining-nums; }
 
 /* Keyboard focus: one visible ring everywhere */
 :where(button, a, [role="tab"], label.btn):focus-visible,
@@ -147,9 +148,9 @@ label.btn:has(input:focus-visible) {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--card);
+  font-family: var(--mono);
   font-size: var(--fs-xs);
   font-weight: 500;
-  letter-spacing: 0.04em;
   color: var(--ink-2);
   white-space: nowrap;
 }
@@ -165,58 +166,48 @@ label.btn:has(input:focus-visible) {
 .hero img, .hero svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero img { object-fit: cover; }
 
-/* Key data, laid on the page (no cards) */
-.facts {
+/* Authenticity stamp on the photo: lands once on first paint (the one orchestrated moment). */
+.stamp-auth {
+  position: absolute;
+  right: var(--s-3);
+  bottom: var(--s-3);
+  margin: 0;
+  padding: var(--s-1) var(--s-3);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: var(--s-4) 0 0;
-  padding: var(--s-3) 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  justify-items: center;
+  border: 2.5px solid var(--oxblood);
+  border-radius: var(--r-sm);
+  background: rgb(255 250 242 / 0.88);
+  color: var(--oxblood);
+  text-align: center;
+  transform: rotate(-7deg);
 }
-.facts > div { padding: 0 var(--s-3); border-left: 1px solid var(--line); }
-.facts > div:first-child { padding-left: 0; border-left: 0; }
-.facts dd { margin: 0; font-family: var(--serif); font-weight: 700; font-size: var(--fs-xl); line-height: 1; }
-.facts dd small { font-family: var(--sans); font-size: var(--fs-sm); font-weight: 500; color: var(--ink-2); }
-.facts dt { margin-top: var(--s-1); font-size: var(--fs-xs); line-height: 1.3; color: var(--ink-2); }
-.facts dt { order: 2; }
-.facts > div { display: flex; flex-direction: column; }
+.stamp-auth span { font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.3; }
+.stamp-auth b { font-family: var(--serif); font-size: var(--fs-lg); font-weight: 700; line-height: 1.1; }
+html:not(.switched) .stamp-auth { animation: stamp-in 300ms cubic-bezier(0.3, 1.4, 0.5, 1) 250ms both; }
+@keyframes stamp-in {
+  from { opacity: 0; transform: rotate(-14deg) scale(1.7); }
+  to { opacity: 1; transform: rotate(-7deg) scale(1); }
+}
+
+/* Coded line, as on a passport's identity page (decorative, aria-hidden). */
+.mrz {
+  margin: var(--s-3) 0 0;
+  padding-top: var(--s-3);
+  border-top: 1px dashed var(--line-strong);
+  font-family: var(--mono);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+}
 
 /* The listing card already shows the pair: no duplicate photo or data on the buyer tab. */
 html[data-tab="buyer"] .hero,
-html[data-tab="buyer"] .facts { display: none; }
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-2);
-  padding: var(--s-2) var(--s-3);
-  border-radius: 999px;
-  background: var(--green-soft);
-  color: var(--green);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-}
-.pulse {
-  position: relative;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  flex-shrink: 0;
-}
-.pulse::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--green);
-  animation: pulse 2.2s var(--ease) infinite;
-}
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 0.55; }
-  70%, 100% { transform: scale(3); opacity: 0; }
-}
+html[data-tab="buyer"] .mrz { display: none; }
 
 /* ---------- Tabs ---------- */
 .tabs-wrap {
@@ -281,6 +272,33 @@ html.switched[data-tab="buyer"] .panel[data-id="buyer"] { animation: rise-in 280
 .card-raised { border-color: var(--line-soft); box-shadow: var(--shadow-2); }
 .section { margin-top: var(--s-5); }
 .section-title { margin: 0 0 var(--s-4); }
+
+/* Visas: one stamp per milestone, one box per possible recraft */
+.visas { margin-top: var(--s-5); padding: var(--s-4); border-radius: var(--r-lg); background: var(--cream-2); }
+.visas-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); font-size: var(--fs-sm); color: var(--ink-2); }
+.visas-title { margin: 0; font-size: var(--fs-sm); font-weight: 600; color: var(--ink); }
+.visas-grid { list-style: none; margin: var(--s-3) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); }
+.visa {
+  aspect-ratio: 1;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: var(--s-1);
+  padding: var(--s-2);
+  border: 2px solid var(--ink-2);
+  border-radius: 50%;
+  color: var(--ink-2);
+  text-align: center;
+}
+.visa-top, .visa-sub { font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.2; }
+.visa-word { font-family: var(--serif); font-size: var(--fs-lg); font-weight: 700; line-height: 1; }
+.visa-done:nth-child(1) { transform: rotate(-8deg); }
+.visa-done:nth-child(2) { transform: rotate(5deg); border-radius: var(--r-md); }
+.visa-done:nth-child(3) { transform: rotate(-3deg); }
+.visa-recraft { border: 4px double var(--oxblood); color: var(--oxblood); transform: rotate(9deg); }
+.visa-recraft:nth-child(2n) { transform: rotate(-6deg); }
+.visa-empty { border: 2px dashed var(--line-strong); color: var(--ink-3); }
+.visa-empty .visa-word { font-family: var(--sans); font-size: var(--fs-md); font-weight: 600; }
 
 /* Timeline (on the page, not in a card) */
 .tl { list-style: none; margin: 0; padding: 0; }
@@ -568,7 +586,7 @@ html.switched[data-tab="buyer"] .panel[data-id="buyer"] { animation: rise-in 280
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pulse::after, .scan { animation: none; }
+  .scan, .stamp-auth { animation: none !important; }
   html .panel, .result > .r { animation: none !important; }
   .tab-ind, .btn, .seg button, .tab { transition: none !important; }
 }

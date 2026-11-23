@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, IBM_Plex_Mono, Inter } from "next/font/google";
 import Banner from "@/components/Banner";
 import "./globals.css";
 
@@ -7,6 +7,14 @@ const serif = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--font-serif",
+  display: "swap",
+});
+
+// Fixed-width only for the serial and the passport's coded line.
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["500"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -36,7 +44,7 @@ const tabFromHash = `(function(){try{var h=location.hash.slice(1).split('?')[0];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: tabFromHash }} />
       </head>

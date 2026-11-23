@@ -252,6 +252,14 @@ C'est ce qui ferait passer le prototype de « fiche produit soignée » à « co
 3. **Moment unique** : au premier affichage, le tampon « Authentic · Port Washington » se pose (300 ms, désactivé en reduced-motion).
 4. **Reprise** = « Mettre fin à ce passeport » ; **Acheteur** = « Le passeport vous est transféré ». La métaphore relie les 3 onglets.
 
+**Direction retenue : B (visas et tampons) + la ligne codée de A.**
+- [x] Tampon « Authentic · Port Washington · Chip matched » posé sur la photo, qui se pose une fois à l'ouverture (300 ms, coupé en reduced-motion) ; le point vert pulsant est supprimé
+- [x] Ligne codée sous la photo, générée depuis les données de la paire (`lib/mrz.ts`), décorative (`aria-hidden`)
+- [x] N° de série et ligne codée en chasse fixe (IBM Plex Mono via `next/font`, seulement là)
+- [x] Page de visas (onglet Story) : un tampon par étape (cuir, trépointe, vente), un tampon bordeaux par ressemelage, des cases en pointillés pour ceux qui restent. La frise détaillée est conservée en dessous
+- [ ] Piste 1 complète (page d'identité avec champs alignés) : non retenue, seule sa ligne codée est reprise
+- [ ] Piste 4 (« Mettre fin à ce passeport » / « Le passeport vous est transféré ») : pas faite, à décider
+
 ---
 
 ## Annexe A : contrastes mesurés (`check_contrast.py`)

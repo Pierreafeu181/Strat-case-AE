@@ -1,19 +1,16 @@
 import type { Pair } from "@/lib/pairs";
 import { usd } from "@/lib/format";
 import type { Notify } from "../Toast";
+import Visas from "../Visas";
 
 export default function StoryTab({ pair, notify }: { pair: Pair; notify: Notify }) {
   return (
     <>
-      <div className="badge">
-        <span className="pulse" aria-hidden />
-        <span>
-          Authentic pair · made in <span translate="no">Port Washington</span>, WI
-        </span>
-      </div>
-      <p className="pitch">
+      <p className="pitch mt-0">
         AE certifies, credits and resells its own pairs: the second life stays with the brand.
       </p>
+
+      <Visas pair={pair} />
 
       <div className="section">
         <h2 className="h2 section-title">From hide to today</h2>
