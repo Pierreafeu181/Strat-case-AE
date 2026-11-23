@@ -33,10 +33,11 @@ export default function StoryTab({ pair, notify }: { pair: Pair; notify: Notify 
 
       <div className="section">
         <button className="btn btn-primary" onClick={() => notify("no booking made, nothing sent.")}>
-          Book recrafting · {usd(150)}
+          Add a recraft visa · {usd(150)}
         </button>
         <p className="small center mt-2">
-          New soles and heels, refinished uppers, at <span translate="no">Port Washington</span>.
+          New soles and heels and refinished uppers, at <span translate="no">Port Washington</span>. Stamped in
+          this passport.
         </p>
       </div>
     </>
