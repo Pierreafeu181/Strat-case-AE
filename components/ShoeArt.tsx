@@ -73,6 +73,6 @@ export function ShoeVisual({
   priority?: boolean;
   sizes?: string;
 }) {
-  if (photo) return <Image src={photo} alt={alt} fill priority={priority} sizes={sizes} />;
+  if (photo) return <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${photo}`} alt={alt} fill priority={priority} sizes={sizes} />;
   return <ShoeSilhouette leather={leather} className="shoe" />;
 }

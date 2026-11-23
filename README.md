@@ -21,8 +21,12 @@ npm run dev        # http://localhost:3000
   - Use landscape, at least 2000 px wide, with no logo visible.
   - The frame is 16:10.
 
-## Deploy
-Import this repo on vercel.com (Add New → Project). Each push to `main` redeploys.
-Write `https://<project>.vercel.app/p/PW-21-048172` on an NTAG213/215 sticker with the "NFC Tools" app.
+## Deploy on GitHub Pages
+`.github/workflows/pages.yml` builds a static export (`GITHUB_PAGES=true`) and deploys it on every push to `main`.
+- **One-time setup:** in Settings → Pages, set Source to **GitHub Actions**. The repo must be public.
+- **Live URL:** https://pierreafeu181.github.io/Strat-case-AE/
+- **NFC sticker URL:** https://pierreafeu181.github.io/Strat-case-AE/p/PW-21-048172/ (NTAG213/215, written with the "NFC Tools" app)
+
+The same code also deploys on Vercel unchanged: without `GITHUB_PAGES`, it is a normal Next.js build at the domain root.
 
 Dates, serial and history are fictional. $450 and $150 are public AE prices; $75 and $245 are our proposals.
