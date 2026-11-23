@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Pair } from "@/lib/pairs";
+import type { Grade } from "@/lib/grade";
 import { ShoeVisual } from "./ShoeArt";
 import { useToast } from "./Toast";
 import StoryTab from "./tabs/StoryTab";
@@ -23,6 +24,7 @@ const isTab = (v: string): v is TabId => TABS.some((t) => t.id === v);
  */
 export default function Passport({ pair }: { pair: Pair }) {
   const [tab, setTab] = useState<TabId>("story");
+  const [tradeGrade, setTradeGrade] = useState<Grade | null>(null);
   const anchor = useRef<HTMLDivElement>(null);
   const { notify, node: toast } = useToast();
 
@@ -97,10 +99,10 @@ export default function Passport({ pair }: { pair: Pair }) {
           <StoryTab pair={pair} notify={notify} />
         </section>
         <section className="panel" data-id="trade" id="panel-trade" role="tabpanel" aria-labelledby="tab-trade" aria-hidden={tab !== "trade"} inert={tab !== "trade"}>
-          <TradeTab pair={pair} notify={notify} />
+          <TradeTab pair={pair} notify={notify} onGrade={setTradeGrade} />
         </section>
         <section className="panel" data-id="buyer" id="panel-buyer" role="tabpanel" aria-labelledby="tab-buyer" aria-hidden={tab !== "buyer"} inert={tab !== "buyer"}>
-          <BuyerTab pair={pair} notify={notify} />
+          <BuyerTab pair={pair} notify={notify} grade={tradeGrade} />
         </section>
       </div>
       {toast}

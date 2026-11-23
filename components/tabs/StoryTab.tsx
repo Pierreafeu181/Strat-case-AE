@@ -10,6 +10,9 @@ export default function StoryTab({ pair, notify }: { pair: Pair; notify: Notify 
         <span className="pulse" aria-hidden />
         Authentic pair · made in Port Washington, WI
       </div>
+      <p className="pitch">
+        AE certifies, credits and resells its own pairs: the second life stays with the brand.
+      </p>
 
       <div className="stats section" style={{ marginTop: 16 }}>
         <div className="card stat">
