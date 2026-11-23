@@ -14,18 +14,18 @@ export default function BuyerTab({ pair, notify, grade }: { pair: Pair; notify: 
   const price = RESALE_BY_GRADE[g];
   const left = pair.recraftsMax - pair.recraftsUsed;
   const rows = [
-    { icon: <IcChip />, k: "Authenticity", v: "Chip matched to passport" },
+    { icon: <IcChip />, k: "Authenticity", v: "Chip matched to its record" },
     { icon: <IcUser />, k: "Owners", v: `${pair.owners} → you'd be #${pair.owners + 1}` },
     { icon: <IcRecraft />, k: "Recrafts left", v: `~${left}` },
     { icon: <IcShield />, k: "Warranty", v: "1 year, by AE" },
-    { icon: <IcPassport />, k: "Passport", v: "Transfers to you" },
+    { icon: <IcPassport />, k: "Certificate of origin", v: "Transfers to you" },
     { icon: <IcFactory />, k: "Graded & refurbished", v: "By AE" },
   ];
 
   return (
     <>
       <h2 className="h2">Certified Pre-Owned</h2>
-      <p className="muted">Once traded in and certified, this pair is listed with its passport. Buy it and the passport is transferred to you.</p>
+      <p className="muted">Once traded in and certified, this pair is listed with its certificate of origin, which transfers to you.</p>
 
       <div className="card card-raised listing mt-4">
         <div className="listing-hero">
@@ -59,7 +59,7 @@ export default function BuyerTab({ pair, notify, grade }: { pair: Pair; notify: 
 
         <p className="partner">Sold on the Pre-Owned tab of <span translate="no">allenedmonds.com</span>, run with our partner Archive.</p>
         <button className="btn btn-primary" onClick={() => notify("no checkout, nothing charged.")}>
-          Take over this passport · {usd(price)}
+          Add to cart — {usd(price)}
         </button>
       </div>
     </>

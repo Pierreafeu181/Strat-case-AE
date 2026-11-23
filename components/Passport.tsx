@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Pair } from "@/lib/pairs";
 import type { Grade } from "@/lib/grade";
-import { mrz } from "@/lib/mrz";
 import { ShoeVisual } from "./ShoeArt";
 import { useToast } from "./Toast";
 import StoryTab from "./tabs/StoryTab";
@@ -95,31 +94,20 @@ export default function Passport({ pair }: { pair: Pair }) {
     tabRefs.current[n]?.focus();
   }
 
-  const [mrz1, mrz2] = mrz(pair);
-
   return (
     <main className="shell">
       <header className="head">
         <div className="head-row">
-          <p className="eyebrow">Digital shoe passport</p>
-          <span className="serial num">No. {pair.serial}</span>
+          <p className="eyebrow">Shoe passport</p>
+          <span className="serial num">{pair.serial}</span>
         </div>
-        <h1 className="h1" translate="no">{pair.model}</h1>
-        <p className="meta">
-          {pair.leather} · {pair.size} · made {pair.madeYear}
-        </p>
         <div className="hero">
           <ShoeVisual photo={pair.photo} leather={pair.leather} alt={`${pair.model}, ${pair.leather}`} priority />
-          <p className="stamp-auth">
-            <span>Authentic</span>
-            <b translate="no">Port Washington</b>
-            <span>Chip matched</span>
-          </p>
         </div>
-        <p className="mrz" aria-hidden translate="no">
-          {mrz1}
-          <br />
-          {mrz2}
+        <p className="kicker">Authenticated · Made in USA</p>
+        <h1 className="h1" translate="no">{pair.model}</h1>
+        <p className="meta">
+          {pair.style}, {pair.leather.toLowerCase()} · {pair.size}
         </p>
       </header>
 
