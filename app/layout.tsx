@@ -1,25 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, IBM_Plex_Mono, Inter } from "next/font/google";
+import { Bodoni_Moda, Jost } from "next/font/google";
 import Banner from "@/components/Banner";
 import "./globals.css";
 
-const serif = Cormorant_Garamond({
+// Display serif: only the certificate of origin and the grade letters.
+const serif = Bodoni_Moda({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
   variable: "--font-serif",
   display: "swap",
 });
 
-// Fixed-width only for the serial and the passport's coded line.
-const mono = IBM_Plex_Mono({
+// Geometric sans for everything else (close to the brand's own sans).
+const sans = Jost({
   subsets: ["latin"],
-  weight: ["500"],
-  variable: "--font-mono",
-  display: "swap",
-});
-
-const sans = Inter({
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-sans",
   display: "swap",
 });
@@ -44,7 +40,7 @@ const tabFromHash = `(function(){try{var h=location.hash.slice(1).split('?')[0];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: tabFromHash }} />
       </head>

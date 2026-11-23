@@ -252,7 +252,14 @@ C'est ce qui ferait passer le prototype de « fiche produit soignée » à « co
 3. **Moment unique** : au premier affichage, le tampon « Authentic · Port Washington » se pose (300 ms, désactivé en reduced-motion).
 4. **Reprise** = « Mettre fin à ce passeport » ; **Acheteur** = « Le passeport vous est transféré ». La métaphore relie les 3 onglets.
 
-**Direction retenue : B (visas et tampons) + la ligne codée de A.**
+**Direction finale : « Boutique » + certificat d'origine** (remplace la direction B ci-dessous, jugée trop administrative et pas assez luxe).
+- [x] Codes boutique : fond blanc, photo pleine largeur, nom du modèle en sans-serif fine (Jost, proche de Sofia Pro, la police de la marque), petites étiquettes en majuscules espacées, filets fins, boutons noirs à angles droits, segments au trait
+- [x] Onglet Story : certificat d'origine (cadre double, nom en Bodoni Moda, n° gravé, « Verified · Chip matched to this record », médaillon « Made in USA »), construit depuis les données de la paire
+- [x] Supprimés : tampons, visas, ligne codée, chasse fixe, Cormorant
+- [x] Boutons en vocabulaire boutique (« Get my $75 credit », « Book recrafting — $150 », « Arrange free take-back », « Add to cart — $245 ») ; la piste 4 passe par le certificat (le ressemelage y est inscrit, il est transmis à l'acheteur)
+- Limite : le site allenedmonds.com bloque les robots (403), les codes viennent de la police relevée (Sofia Pro) et de la connaissance de la marque, pas d'une lecture du site
+
+*Historique — direction B (visas et tampons) + la ligne codée de A, remplacée :*
 - [x] Tampon « Authentic · Port Washington · Chip matched » posé sur la photo, qui se pose une fois à l'ouverture (300 ms, coupé en reduced-motion) ; le point vert pulsant est supprimé
 - [x] Ligne codée sous la photo, générée depuis les données de la paire (`lib/mrz.ts`), décorative (`aria-hidden`)
 - [x] N° de série et ligne codée en chasse fixe (IBM Plex Mono via `next/font`, seulement là)

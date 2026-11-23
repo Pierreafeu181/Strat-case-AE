@@ -1,16 +1,16 @@
 import type { Pair } from "@/lib/pairs";
 import { usd } from "@/lib/format";
 import type { Notify } from "../Toast";
-import Visas from "../Visas";
+import Certificate from "../Certificate";
 
 export default function StoryTab({ pair, notify }: { pair: Pair; notify: Notify }) {
   return (
     <>
-      <p className="pitch mt-0">
+      <Certificate pair={pair} />
+
+      <p className="pitch">
         AE certifies, credits and resells its own pairs: the second life stays with the brand.
       </p>
-
-      <Visas pair={pair} />
 
       <div className="section">
         <h2 className="h2 section-title">From hide to today</h2>
@@ -33,11 +33,11 @@ export default function StoryTab({ pair, notify }: { pair: Pair; notify: Notify 
 
       <div className="section">
         <button className="btn btn-primary" onClick={() => notify("no booking made, nothing sent.")}>
-          Add a recraft visa · {usd(150)}
+          Book recrafting — {usd(150)}
         </button>
         <p className="small center mt-2">
-          New soles and heels and refinished uppers, at <span translate="no">Port Washington</span>. Stamped in
-          this passport.
+          New soles and heels and refinished uppers, at <span translate="no">Port Washington</span>. Recorded on
+          its certificate.
         </p>
       </div>
     </>
