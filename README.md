@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shoe Passport — concept prototype (ESSEC Strategy, Team 4)
 
-## Getting Started
+A mobile-first "digital shoe passport" for the **AE Certified Pre-Owned** pitch.
+It is a concept prototype: **not an Allen Edmonds service, no backend, no data collected**.
 
-First, run the development server:
+## Routes
+- `/` → redirects to the demo pair, `/p/PW-21-048172`
+- `/p/[serial]` is the URL written on the NFC sticker. Three seeded pairs live in `data/pairs.json`.
+- Tabs can be linked directly: `#story`, `#trade`, `#buyer`
 
+## Run locally
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Edit the content
+- **Pairs, timeline and prices:** `data/pairs.json`
+- **Grading rule:** `lib/grade.ts`. Any worst answer gives C; all best answers give A; everything else gives B.
+- **Real photo:** put a JPG in `public/shoes/` and set `"photo": "/shoes/<file>.jpg"` on the pair.
+  - Use landscape, at least 2000 px wide, with no logo visible.
+  - The frame is 16:10.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy
+Import this repo on vercel.com (Add New → Project). Each push to `main` redeploys.
+Write `https://<project>.vercel.app/p/PW-21-048172` on an NTAG213/215 sticker with the "NFC Tools" app.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Dates, serial and history are fictional. $450 and $150 are public AE prices; $75 and $245 are our proposals.

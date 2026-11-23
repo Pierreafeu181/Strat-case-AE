@@ -1,0 +1,69 @@
+[
+  {
+    "serial": "PW-21-048172",
+    "model": "Park Avenue",
+    "style": "Cap-toe oxford",
+    "leather": "Black calf",
+    "size": "US 10.5 D",
+    "madeYear": 2021,
+    "owners": 1,
+    "recraftsUsed": 1,
+    "recraftsMax": 3,
+    "handSteps": 212,
+    "priceNew": 450,
+    "resalePrice": 245,
+    "photo": null,
+    "timeline": [
+      { "date": "Feb 2021", "title": "Leather selected", "place": "Tannery lot BC-2107", "detail": "Full-grain black calf, graded by hand for even grain." },
+      { "date": "Mar 2021", "title": "Uppers hand-sewn", "place": "Dominican Republic", "detail": "Cut and stitched by AE's upper-making team." },
+      { "date": "Apr 2021", "title": "Goodyear-welted", "place": "Port Washington, WI", "detail": "Lasted, welted and finished: 212 steps in all." },
+      { "date": "Jun 2021", "title": "Sold", "place": "Studio store", "detail": "First owner. Passport opened." },
+      { "date": "Sep 2024", "title": "Recrafted", "place": "Port Washington, WI", "detail": "New leather soles and heels, uppers refinished. Recraft 1 of ~3." },
+      { "date": "Today", "title": "In use", "place": "With its owner", "detail": "Eligible for trade-in or another recraft." }
+    ]
+  },
+  {
+    "serial": "PW-19-031544",
+    "model": "Strand",
+    "style": "Cap-toe oxford with broguing",
+    "leather": "Walnut calf",
+    "size": "US 9 D",
+    "madeYear": 2019,
+    "owners": 1,
+    "recraftsUsed": 0,
+    "recraftsMax": 3,
+    "handSteps": 212,
+    "priceNew": 450,
+    "resalePrice": 245,
+    "photo": null,
+    "timeline": [
+      { "date": "Jan 2019", "title": "Leather selected", "place": "Tannery lot WC-1902", "detail": "Walnut calf, hand-burnished finish." },
+      { "date": "Feb 2019", "title": "Uppers hand-sewn", "place": "Dominican Republic", "detail": "Cut, punched and stitched." },
+      { "date": "Mar 2019", "title": "Goodyear-welted", "place": "Port Washington, WI", "detail": "Lasted, welted and finished." },
+      { "date": "May 2019", "title": "Sold", "place": "allenedmonds.com", "detail": "First owner. Passport opened." },
+      { "date": "Today", "title": "In use", "place": "With its owner", "detail": "Never recrafted, so all recrafts are still available." }
+    ]
+  },
+  {
+    "serial": "PW-24-009871",
+    "model": "Reserve No. 7 (concept)",
+    "style": "Whole-cut oxford",
+    "leather": "Dark-brown museum calf",
+    "size": "US 11 E",
+    "madeYear": 2024,
+    "owners": 1,
+    "recraftsUsed": 0,
+    "recraftsMax": 3,
+    "handSteps": 212,
+    "priceNew": 950,
+    "resalePrice": 520,
+    "photo": null,
+    "timeline": [
+      { "date": "Aug 2024", "title": "Leather selected", "place": "Tannery lot MC-2408", "detail": "Museum calf, single hide for a whole-cut upper." },
+      { "date": "Sep 2024", "title": "Uppers hand-sewn", "place": "Dominican Republic", "detail": "One-piece upper, closed by hand." },
+      { "date": "Oct 2024", "title": "Goodyear-welted", "place": "Port Washington, WI", "detail": "Reserve finishing and hand patina." },
+      { "date": "Dec 2024", "title": "Sold", "place": "Studio store", "detail": "First owner. NFC tag fitted at sale." },
+      { "date": "Today", "title": "In use", "place": "With its owner", "detail": "All recrafts still available." }
+    ]
+  }
+]
