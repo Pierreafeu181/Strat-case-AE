@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import type { Pair } from "@/lib/pairs";
 import { PHOTO_DEMO_ANSWERS, QUESTIONS, gradeOf, type Answer, type Answers } from "@/lib/grade";
 import type { Notify } from "../Toast";
-import { ShoeVisual } from "../ShoeArt";
 import { IcCamera } from "../Icons";
 
 const ANALYSIS_MS = 2000;
@@ -12,7 +11,7 @@ const STAGES = ["Checking uppers…", "Checking soles & heels…", "Checking lin
 
 type Photo = { kind: "none" } | { kind: "sample" } | { kind: "file"; url: string };
 
-export default function TradeTab({ pair, notify }: { pair: Pair; notify: Notify }) {
+export default function TradeTab({ notify }: { pair: Pair; notify: Notify }) {
   const [answers, setAnswers] = useState<Answers>([null, null, null]);
   const [photo, setPhoto] = useState<Photo>({ kind: "none" });
   const [analysing, setAnalysing] = useState(false);
@@ -88,7 +87,8 @@ export default function TradeTab({ pair, notify }: { pair: Pair; notify: Notify 
             // eslint-disable-next-line @next/next/no-img-element
             <img src={photo.url} alt="Your photo" />
           ) : photo.kind === "sample" ? (
-            <ShoeVisual photo={pair.photo} leather={pair.leather} alt="Sample photo" sizes="76px" />
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/shoes/sample-worn.webp`} alt="Sample photo of a worn pair" />
           ) : (
             <IcCamera size={26} />
           )}
