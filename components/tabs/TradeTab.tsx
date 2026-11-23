@@ -206,10 +206,10 @@ export default function TradeTab({
           <ol className="steps">
             <li><span className="step-n">1</span><span><b>Drop off</b> at a Studio store, or ship it free.</span></li>
             <li><span className="step-n">2</span><span>{abGrade === "A" ? <><b>Cleaned and checked</b> by AE, no refurb needed.</> : <><b>Light refurb</b> by AE at the Studio, to AE&apos;s grading standard.</>}</span></li>
-            <li><span className="step-n">3</span><span><b>Resold as Certified Pre-Owned</b> at ~{usd(RESALE_BY_GRADE[abGrade])}, with its passport.</span></li>
+            <li><span className="step-n">3</span><span><b>Resold as Certified Pre-Owned</b> at ~{usd(RESALE_BY_GRADE[abGrade])}, with its passport: <b>a new owner opens the next page</b>.</span></li>
           </ol>
-          <button className="btn btn-primary" onClick={() => notify("no credit issued, nothing sent.")}>
-            Get my {CREDIT} credit
+          <button className="btn btn-primary" onClick={() => notify("no credit issued, passport still open.")}>
+            Close my passport · {CREDIT} credit
           </button>
         </div>
 
@@ -228,10 +228,10 @@ export default function TradeTab({
           </p>
           <ol className="steps">
             <li><span className="step-n">1</span><span><b>Ship it</b> or drop it at a Studio store.</span></li>
-            <li><span className="step-n">2</span><span><b>Rebuilt</b> on its original last, then logged in this passport.</span></li>
+            <li><span className="step-n">2</span><span><b>Rebuilt</b> on its original last, then stamped as a new visa in this passport.</span></li>
           </ol>
           <button className="btn btn-primary" onClick={() => notify("no booking made, nothing sent.")}>
-            Book recrafting · {RECRAFT}
+            Add a recraft visa · {RECRAFT}
           </button>
         </div>
 
@@ -250,10 +250,10 @@ export default function TradeTab({
           </p>
           <ol className="steps">
             <li><span className="step-n">1</span><span><b>Drop it</b> at a Studio store, or ship it free.</span></li>
-            <li><span className="step-n">2</span><span><b>Recycled</b> through AE&apos;s take-back program.</span></li>
+            <li><span className="step-n">2</span><span><b>Recycled</b> through AE&apos;s take-back program, and the passport is retired.</span></li>
           </ol>
-          <button className="btn btn-primary" onClick={() => notify("no pickup booked, nothing sent.")}>
-            Arrange free take-back
+          <button className="btn btn-primary" onClick={() => notify("no pickup booked, passport still open.")}>
+            Retire this passport · free
           </button>
         </div>
       </div>

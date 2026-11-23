@@ -25,7 +25,7 @@ export default function BuyerTab({ pair, notify, grade }: { pair: Pair; notify: 
   return (
     <>
       <h2 className="h2">Certified Pre-Owned</h2>
-      <p className="muted">Once traded in and certified, this pair is listed like this for its next owner.</p>
+      <p className="muted">Once traded in and certified, this pair is listed with its passport. Buy it and the passport is transferred to you.</p>
 
       <div className="card card-raised listing mt-4">
         <div className="listing-hero">
@@ -59,7 +59,7 @@ export default function BuyerTab({ pair, notify, grade }: { pair: Pair; notify: 
 
         <p className="partner">Sold on the Pre-Owned tab of <span translate="no">allenedmonds.com</span>, run with our partner Archive.</p>
         <button className="btn btn-primary" onClick={() => notify("no checkout, nothing charged.")}>
-          Add to cart · {usd(price)}
+          Take over this passport · {usd(price)}
         </button>
       </div>
     </>

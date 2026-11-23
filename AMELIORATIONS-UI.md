@@ -258,7 +258,7 @@ C'est ce qui ferait passer le prototype de « fiche produit soignée » à « co
 - [x] N° de série et ligne codée en chasse fixe (IBM Plex Mono via `next/font`, seulement là)
 - [x] Page de visas (onglet Story) : un tampon par étape (cuir, trépointe, vente), un tampon bordeaux par ressemelage, des cases en pointillés pour ceux qui restent. La frise détaillée est conservée en dessous
 - [ ] Piste 1 complète (page d'identité avec champs alignés) : non retenue, seule sa ligne codée est reprise
-- [ ] Piste 4 (« Mettre fin à ce passeport » / « Le passeport vous est transféré ») : pas faite, à décider
+- [x] Piste 4 : boutons « Close my passport · $75 credit », « Add a recraft visa · $150 », « Retire this passport · free », « Take over this passport · $245 » ; étapes et textes d'intro alignés (nouvelle page pour le prochain propriétaire, visa tamponné, passeport retiré, passeport transféré)
 
 ---
 
