@@ -234,7 +234,7 @@ oil-ui exige que la relecture soit faite par un relecteur isolé : un agent sép
 - [x] **Une seule couleur d'action** (encre) ; vert et bordeaux réservés aux *statuts* (note A/B accepté, C/refus)
 - [x] **Moins de cartes** : frise posée sur le fond, stats intégrées à l'en-tête ; seule la fiche acheteur reste une carte en relief
 - [x] **Vue bureau / projection** : à partir de 900 px, le téléphone dans un cadre au centre, et à côté un QR code « Scannez la puce » avec le pitch en 3 lignes
-  - *Fait sans le QR code (choix : pas de bibliothèque) ; l'adresse de la page est affichée en texte.*
+  - *QR code ajouté ensuite : il ouvre `pierreafeu181.github.io/Strat-case-AE/p/PW-21-048172/`. Le motif est généré une fois et intégré en chemin SVG (`lib/demoQr.ts`), sans bibliothèque dans l'app ; décodage vérifié.*
 - [x] **Prix et dates** via `Intl.NumberFormat` / `Intl.DateTimeFormat` ; `translate="no"` sur les marques
   - *Prix et marques faits. Dates non faites : `data/pairs.json` contient « Feb 2021 », pas de l'ISO, et les données ne devaient pas changer.*
 - [x] **Note de reprise dans l'URL** (`#trade?g=B`) pour une démo reproductible et partageable
