@@ -29,4 +29,4 @@ npm run dev        # http://localhost:3000
 
 The same code also deploys on Vercel unchanged: without `GITHUB_PAGES`, it is a normal Next.js build at the domain root.
 
-Dates, serial and history are fictional. $450 and $150 are public AE prices; $75 and $245 are our proposals.
+Dates, serial and history are fictional. $450 and $150 are public AE prices; $75, $245 and $265 are our proposals.

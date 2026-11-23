@@ -18,6 +18,7 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      ".claude/**", // vendored design-skill scripts, not app code
     ],
   },
 ];

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Passport from "@/components/Passport";
 import Footer from "@/components/Footer";
+import StageAside from "@/components/StageAside";
 import { getPair, pairs } from "@/lib/pairs";
 
 export const dynamicParams = false;
@@ -21,9 +22,12 @@ export default async function PassportPage({ params }: Props) {
   const pair = getPair((await params).serial);
   if (!pair) notFound();
   return (
-    <>
-      <Passport pair={pair} />
-      <Footer />
-    </>
+    <div className="stage">
+      <StageAside />
+      <div className="stage-app">
+        <Passport pair={pair} />
+        <Footer />
+      </div>
+    </div>
   );
 }

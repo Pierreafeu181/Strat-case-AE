@@ -6,9 +6,21 @@ import { PHOTO_DEMO_ANSWERS, QUESTIONS, RESALE_BY_GRADE, gradeOf, type Answer, t
 import type { Notify } from "../Toast";
 import { IcCamera } from "../Icons";
 import { ShoeVisual } from "../ShoeArt";
+import { usd } from "@/lib/format";
 
 const ANALYSIS_MS = 2000;
 const STAGES = ["Checking uppers…", "Checking soles & heels…", "Checking lining…"];
+
+/** Typical answers that land on each grade, to restore a grade shared in the URL (#trade?g=C). */
+const ANSWERS_FOR: Record<Grade, Answer[]> = {
+  A: [0, 0, 0],
+  B: [...PHOTO_DEMO_ANSWERS],
+  C: [0, 2, 0],
+  X: [2, 0, 0],
+};
+
+const CREDIT = usd(75);
+const RECRAFT = usd(150);
 
 type Photo = { kind: "none" } | { kind: "sample" } | { kind: "file"; url: string };
 
@@ -16,10 +28,12 @@ export default function TradeTab({
   pair,
   notify,
   onGrade,
+  initialGrade = null,
 }: {
   pair: Pair;
   notify: Notify;
   onGrade?: (g: Grade | null) => void;
+  initialGrade?: Grade | null;
 }) {
   const [answers, setAnswers] = useState<Answers>([null, null, null]);
   const [photo, setPhoto] = useState<Photo>({ kind: "none" });
@@ -32,10 +46,19 @@ export default function TradeTab({
   const ok = grade === "A" || grade === "B";
   const abGrade: "A" | "B" = grade === "A" ? "A" : "B";
   const prevGrade = useRef(grade);
+  const restoring = useRef(false);
+
+  // A grade from the URL fills the answers once, without scrolling.
+  useEffect(() => {
+    if (!initialGrade) return;
+    restoring.current = true;
+    setAnswers([...ANSWERS_FOR[initialGrade]]);
+  }, [initialGrade]);
 
   // Scroll the result into view the moment a grade first appears.
   useEffect(() => {
-    if (grade && !prevGrade.current) {
+    if (restoring.current) restoring.current = false;
+    else if (grade && !prevGrade.current) {
       resultRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
     prevGrade.current = grade;
@@ -87,13 +110,22 @@ export default function TradeTab({
       ? "Done · answers filled in below"
       : "Instant grade · stays on your phone";
 
+  const announce =
+    grade === "A" || grade === "B"
+      ? `Grade ${grade}, accepted: ${CREDIT} credit.`
+      : grade === "C"
+        ? "Grade C, not bought back: recrafting offered."
+        : grade === "X"
+          ? "Not eligible, leather damage: free take-back."
+          : "";
+
   return (
     <>
-      <p className="eyebrow">AE Certified Pre-Owned</p>
       <h2 className="h2">What is your pair worth?</h2>
       <p className="muted">Answer three questions, or let a photo do it.</p>
+      <p className="small mt-1">Instant estimate, confirmed by AE at drop-off.</p>
 
-      <div className="card photo-card section" style={{ marginTop: 14 }}>
+      <div className="card photo-card mt-4">
         <div className="thumb">
           {photo.kind === "file" ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -109,11 +141,11 @@ export default function TradeTab({
           <div className="photo-title">{analysing ? "Analysing…" : "Photo check"}</div>
           <div className="photo-sub" aria-live="polite">{sub}</div>
           {analysing || analysed ? (
-            <div className={`progress${analysing ? " run" : ""}`} aria-hidden>
-              <i style={analysed ? { transform: "scaleX(1)" } : undefined} />
+            <div className={`progress${analysing ? " run" : " done"}`} aria-hidden>
+              <i />
             </div>
           ) : null}
-          <div className="photo-actions" style={analysing || analysed ? { marginTop: 6 } : undefined}>
+          <div className="photo-actions">
             <label className="btn btn-ghost btn-sm" aria-disabled={analysing}>
               Upload photo
               <input className="vh" type="file" accept="image/*" onChange={onFile} disabled={analysing} />
@@ -128,7 +160,7 @@ export default function TradeTab({
       {QUESTIONS.map((q, qi) => (
         <div className="q" key={q.id}>
           <div className="q-label">
-            {q.label} <span>{qi + 1} / 3</span>
+            {q.label} <span aria-hidden>{qi + 1} of 3</span>
           </div>
           <div className="seg" role="group" aria-label={q.label}>
             {q.options.map((o, oi) => (
@@ -146,22 +178,14 @@ export default function TradeTab({
         </div>
       ))}
 
-      <p className="small" style={{ margin: "10px 0 0" }}>
-        Instant estimate · confirmed by AE at drop-off.
-      </p>
+      <p className="vh" role="status">{announce}</p>
 
-      <div className="result" ref={resultRef} aria-live="polite">
-        {/* Waiting */}
-        <div className={`card r r-wait${grade === null ? " on" : ""}`} aria-hidden={grade !== null}>
-          <div className="r-top">
-            <div className="grade wait">?</div>
-            <div>
-              <div className="r-kicker wait">Your grade</div>
-              <div className="r-title">Answer the 3 questions</div>
-            </div>
-          </div>
-          <p className="r-text">
-            Grade A or B: we buy it back with a <b>$75 credit</b>. Grade C: we offer a recraft. Damaged
+      <div className="result" ref={resultRef}>
+        {/* Waiting: one compact line, no empty card */}
+        <div className={`r r-wait${grade === null ? " on" : ""}`} aria-hidden={grade !== null}>
+          <span className="grade wait" aria-hidden>?</span>
+          <p>
+            <b>Answer the 3 questions to see your offer.</b> A or B: {CREDIT} credit. C: a recraft. Damaged
             leather: free take-back.
           </p>
         </div>
@@ -172,7 +196,7 @@ export default function TradeTab({
             <div className="grade ok">{abGrade}</div>
             <div>
               <div className="r-kicker ok">Grade {abGrade} · accepted</div>
-              <div className="r-title">$75 credit</div>
+              <div className="r-title">{CREDIT} credit</div>
             </div>
           </div>
           <p className="r-text">
@@ -182,10 +206,10 @@ export default function TradeTab({
           <ol className="steps">
             <li><span className="step-n">1</span><span><b>Drop off</b> at a Studio store, or ship it free.</span></li>
             <li><span className="step-n">2</span><span>{abGrade === "A" ? <><b>Cleaned and checked</b> by AE, no refurb needed.</> : <><b>Light refurb</b> by AE at the Studio, to AE&apos;s grading standard.</>}</span></li>
-            <li><span className="step-n">3</span><span><b>Resold as Certified Pre-Owned</b> at ~${RESALE_BY_GRADE[abGrade]}, with its passport.</span></li>
+            <li><span className="step-n">3</span><span><b>Resold as Certified Pre-Owned</b> at ~{usd(RESALE_BY_GRADE[abGrade])}, with its passport.</span></li>
           </ol>
-          <button className="btn btn-green" onClick={() => notify("no credit issued, nothing sent.")}>
-            Get my $75 credit
+          <button className="btn btn-primary" onClick={() => notify("no credit issued, nothing sent.")}>
+            Get my {CREDIT} credit
           </button>
         </div>
 
@@ -199,15 +223,15 @@ export default function TradeTab({
             </div>
           </div>
           <p className="r-text">
-            Soles worn through: too worn to resell as is. The Goodyear welt means it can be rebuilt: a{" "}
-            <b>Recrafting</b> brings new soles and heels and refinished uppers, at Port Washington.
+            Soles worn through: too worn to resell as is. The <span translate="no">Goodyear</span> welt means it can be rebuilt: a{" "}
+            <b>Recrafting</b> brings new soles and heels and refinished uppers, at <span translate="no">Port Washington</span>.
           </p>
           <ol className="steps">
             <li><span className="step-n">1</span><span><b>Ship it</b> or drop it at a Studio store.</span></li>
             <li><span className="step-n">2</span><span><b>Rebuilt</b> on its original last, then logged in this passport.</span></li>
           </ol>
-          <button className="btn btn-oxblood" onClick={() => notify("no booking made, nothing sent.")}>
-            Book recrafting · $150
+          <button className="btn btn-primary" onClick={() => notify("no booking made, nothing sent.")}>
+            Book recrafting · {RECRAFT}
           </button>
         </div>
 

@@ -2,6 +2,7 @@ import type { Pair } from "@/lib/pairs";
 import { RESALE_BY_GRADE, type Grade } from "@/lib/grade";
 import type { Notify } from "../Toast";
 import { ShoeVisual } from "../ShoeArt";
+import { usd } from "@/lib/format";
 import { IcChip, IcFactory, IcPassport, IcRecraft, IcShield, IcUser } from "../Icons";
 
 /**
@@ -23,29 +24,28 @@ export default function BuyerTab({ pair, notify, grade }: { pair: Pair; notify: 
 
   return (
     <>
-      <p className="eyebrow">Buying used? · the next owner</p>
       <h2 className="h2">Certified Pre-Owned</h2>
-      <p className="muted">Once traded in and certified, this pair is listed like this.</p>
+      <p className="muted">Once traded in and certified, this pair is listed like this for its next owner.</p>
 
-      <div className="card section" style={{ marginTop: 14, overflow: "hidden" }}>
+      <div className="card card-raised listing mt-4">
         <div className="listing-hero">
           <ShoeVisual photo={pair.photo} leather={pair.leather} alt={`${pair.model}, certified pre-owned`} sizes="(max-width: 440px) 100vw, 440px" />
           <span className="tag-cpo">Certified · Grade {g}</span>
         </div>
-        <div style={{ fontWeight: 600 }}>
-          {pair.model} · {pair.leather}
+        <div className="fw-600">
+          <span translate="no">{pair.model}</span> · {pair.leather}
         </div>
-        <div className="small" style={{ marginTop: 2 }}>
+        <div className="small">
           {pair.size} · made {pair.madeYear} · No. {pair.serial}
         </div>
         <div className="price-row">
-          <span className="price num">${price}</span>
+          <span className="price num">{usd(price)}</span>
           <span className="was num">
-            <s>${pair.priceNew}</s> new
+            <s>{usd(pair.priceNew)}</s> new
           </span>
-          <span className="save num">Save ${pair.priceNew - price}</span>
+          <span className="save num">Save {usd(pair.priceNew - price)}</span>
         </div>
-        <p className="anchor num">Uncertified on eBay: ~$70 · no history, no warranty</p>
+        <p className="anchor num">Uncertified on eBay: ~{usd(70)} · no history, no warranty</p>
 
         <ul className="checks">
           {rows.map((r) => (
@@ -57,9 +57,9 @@ export default function BuyerTab({ pair, notify, grade }: { pair: Pair; notify: 
           ))}
         </ul>
 
-        <p className="partner">Sold on the Pre-Owned tab of allenedmonds.com, run with our partner Archive.</p>
+        <p className="partner">Sold on the Pre-Owned tab of <span translate="no">allenedmonds.com</span>, run with our partner Archive.</p>
         <button className="btn btn-primary" onClick={() => notify("no checkout, nothing charged.")}>
-          Add to cart · ${price}
+          Add to cart · {usd(price)}
         </button>
       </div>
     </>
